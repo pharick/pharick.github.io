@@ -1,0 +1,6 @@
+{
+  "layout": "layouts/post.njk",
+  "tags": ["posts"],
+  "type": "note",
+  "permalink": "/posts/{{ page.date | isoDate }}-{{ page.fileSlug | slugify }}/"
+}

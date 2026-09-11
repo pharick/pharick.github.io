@@ -1,0 +1,44 @@
+---
+layout: layouts/base.njk
+---
+{% set info = type | typeInfo %}
+<article class="post">
+  <header class="post-header">
+    <p class="post-meta">
+      <span class="badge badge-{{ type or 'note' }}">{{ info.icon }} {{ info.label }}</span>
+      <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
+    </p>
+    <h1>{{ title }}</h1>
+    {% if summary %}<p class="lead">{{ summary }}</p>{% endif %}
+    {% if links %}
+    <ul class="links">
+      {% for link in links %}
+      <li><a href="{{ link.url }}" rel="noopener">{{ link.label }} ↗</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </header>
+
+  <div class="post-body">
+    {{ content | safe }}
+  </div>
+
+  {% set ctags = tags | contentTags %}
+  {% if ctags.length %}
+  <footer class="post-footer">
+    <ul class="tags">
+      {% for tag in ctags %}
+      <li><a class="tag" href="{{ ('/tags/' + tag + '/') }}">#{{ tag }}</a></li>
+      {% endfor %}
+    </ul>
+  </footer>
+  {% endif %}
+
+  <nav class="post-nav" aria-label="Neighbouring posts">
+    {# collections.posts is newest-first, so "next" in the array is the older post #}
+    {% set prev = collections.posts | getPreviousCollectionItem %}
+    {% set next = collections.posts | getNextCollectionItem %}
+    {% if next %}<a class="post-nav-older" href="{{ next.url }}">← Earlier: {{ next.data.title }}</a>{% endif %}
+    {% if prev %}<a class="post-nav-newer" href="{{ prev.url }}">Later: {{ prev.data.title }} →</a>{% endif %}
+  </nav>
+</article>

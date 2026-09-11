@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+eleventyExcludeFromCollections: true
+---
+<section class="hero">
+  <h1>{{ site.tagline }}</h1>
+  <p>
+    Hi, I'm {{ site.author.name }}. This is my running log of how I feed my brain:
+    projects I build, courses I finish, books I read, concepts that finally click.
+    Newest first.
+  </p>
+  <p class="hero-stats">
+    {{ collections.posts.length }} {% if collections.posts.length == 1 %}entry{% else %}entries{% endif %} ·
+    {% for g in collections.postsByYear %}<a href="#y{{ g.year }}">{{ g.year }}</a>{% if not loop.last %} · {% endif %}{% endfor %}
+  </p>
+  <p class="hero-legend">
+    {% for key, t in postTypes %}<span class="badge badge-{{ key }}">{{ t.icon }} {{ t.label }}</span> {% endfor %}
+  </p>
+</section>
+
+{% set groups = collections.postsByYear %}
+{% include "timeline.njk" %}

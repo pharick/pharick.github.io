@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+eleventyExcludeFromCollections: true
+pagination:
+  data: collections.tagList
+  size: 1
+  alias: t
+permalink: /tags/{{ t.tag | slugify }}/
+eleventyComputed:
+  title: "#{{ t.tag }}"
+---
+<h1>#{{ t.tag }}</h1>
+<p>{{ t.count }} {% if t.count == 1 %}entry{% else %}entries{% endif %} tagged with <em>{{ t.tag }}</em>. <a href="{{ '/tags/' }}">All tags</a>.</p>
+
+{% set groups = collections[t.tag] | groupByYear %}
+{% include "timeline.njk" %}

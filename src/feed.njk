@@ -1,0 +1,29 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+eleventyImport:
+  collections: ["posts"]
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ site.title }} — timeline</title>
+  <subtitle>{{ site.tagline }}</subtitle>
+  <link href="{{ site.url }}/feed.xml" rel="self"/>
+  <link href="{{ site.url }}/"/>
+  <updated>{{ collections.posts | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <id>{{ site.url }}/</id>
+  <author><name>{{ site.author.name }}</name></author>
+  {%- for post in collections.posts | limit(30) %}
+  {%- set absoluteUrl = (site.url + post.url) %}
+  <entry>
+    <title>{{ post.data.title }}</title>
+    <link href="{{ absoluteUrl }}"/>
+    <updated>{{ post.date | dateToRfc3339 }}</updated>
+    <id>{{ absoluteUrl }}</id>
+    {%- if post.data.summary %}
+    <summary>{{ post.data.summary }}</summary>
+    {%- endif %}
+    <content type="html">{{ post.templateContent | renderTransforms(post.data.page, site.url) }}</content>
+  </entry>
+  {%- endfor %}
+</feed>

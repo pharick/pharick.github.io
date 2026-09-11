@@ -1,0 +1,13 @@
+---
+layout: layouts/base.njk
+title: Tags
+permalink: /tags/
+eleventyExcludeFromCollections: true
+---
+<h1>Tags</h1>
+<p>Every topic that appears on the timeline.</p>
+<ul class="tag-cloud">
+  {% for t in collections.tagList %}
+  <li><a class="tag" href="{{ ('/tags/' + t.tag + '/') }}">#{{ t.tag }} <small>{{ t.count }}</small></a></li>
+  {% endfor %}
+</ul>

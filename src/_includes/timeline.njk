@@ -1,0 +1,34 @@
+{#
+  Renders a vertical timeline.
+  Expects `groups` = [{ year, posts }] (newest first).
+#}
+<div class="timeline">
+  {% for group in groups %}
+  <section class="tl-year" id="y{{ group.year }}">
+    <h2 class="tl-year-label"><span>{{ group.year }}</span></h2>
+    <ol class="tl-list">
+      {% for post in group.posts %}
+      {% set info = post.data.type | typeInfo %}
+      <li class="tl-item tl-item-{{ post.data.type or 'note' }}">
+        <span class="tl-dot" aria-hidden="true">{{ info.icon }}</span>
+        <article class="tl-card">
+          <p class="post-meta">
+            <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+            <span class="badge badge-{{ post.data.type or 'note' }}">{{ info.label }}</span>
+          </p>
+          <h3 class="tl-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+          {% if post.data.summary %}<p class="tl-summary">{{ post.data.summary }}</p>{% endif %}
+          {% set ctags = post.data.tags | contentTags %}
+          {% if ctags.length or post.data.links %}
+          <p class="tl-foot">
+            {% for tag in ctags %}<a class="tag" href="{{ ('/tags/' + tag + '/') }}">#{{ tag }}</a> {% endfor %}
+            {% for link in post.data.links %}<a class="ext" href="{{ link.url }}" rel="noopener">{{ link.label }} ↗</a> {% endfor %}
+          </p>
+          {% endif %}
+        </article>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+  {% endfor %}
+</div>

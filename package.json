@@ -1,0 +1,18 @@
+{
+  "name": "site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal timeline / brain-feeding diary of Artem Forkunov, built with Eleventy",
+  "type": "module",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy",
+    "new": "node scripts/new-post.js"
+  },
+  "author": "Artem Forkunov",
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6",
+    "@11ty/eleventy-plugin-rss": "^2.0.4"
+  }
+}
