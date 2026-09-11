@@ -1,9 +1,9 @@
-# pharick.github.io/site
+# pharick.github.io
 
 My personal timeline: a diary of what I build, read and learn, published with
 [Eleventy](https://www.11ty.dev/) on GitHub Pages.
 
-Live site: <https://pharick.github.io/site/>
+Live site: <https://pharick.github.io/>
 
 ## Adding an entry
 
@@ -51,9 +51,9 @@ npm run build    # writes the static site to _site/
 publishes it with GitHub Pages. One-time setup in the repository settings:
 **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
-The workflow sets the URL prefix automatically: `/site/` for this repository,
-or `/` if the repository is ever renamed to `pharick.github.io`. If you rename
-it, also update `url` in `src/_data/site.json`.
+The workflow computes the URL prefix from the repository name: `/` for
+`pharick.github.io` (a user site), or `/<repo>/` for a project site. If the
+repository is renamed, also update `url` in `src/_data/site.json`.
 
 ## Layout
 

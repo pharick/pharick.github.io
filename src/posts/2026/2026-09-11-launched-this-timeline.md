@@ -6,7 +6,7 @@ summary: "A static site on GitHub Pages where I log everything that feeds my bra
 tags: [meta, eleventy, github-pages]
 links:
   - label: Source
-    url: https://github.com/pharick/site
+    url: https://github.com/pharick/pharick.github.io
 ---
 
 I wanted a CV that is not a frozen list of skills but a diary: a timeline of
